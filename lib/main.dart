@@ -8,6 +8,11 @@ class FriendlyChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      theme: new ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.purple,
+        accentColor: Colors.purpleAccent,
+      ),
       title: "Friendlychat",
       home: new ChatScreen(),
     );
@@ -23,29 +28,31 @@ class ChatScreenState extends State<ChatScreen> {
   final TextEditingController _textController = new TextEditingController();
 
   Widget _buildTextComposer() {
-    return new Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: new Row(
-        children: <Widget>[
-          new Flexible(
-            child: new TextField(
-              controller: _textController,
-              onSubmitted: _handleSubmitted,
-              decoration:
-                  new InputDecoration.collapsed(hintText: "Send a message"),
+    return new IconTheme(
+      data: new IconThemeData(color: Theme.of(context).accentColor),
+      child: new Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: new Row(
+          children: <Widget>[
+            new Flexible(
+              child: new TextField(
+                controller: _textController,
+                onSubmitted: _handleSubmitted,
+                decoration:
+                    new InputDecoration.collapsed(hintText: "Send a message"),
+              ),
             ),
-          ),
-          new Container(
-            margin: new EdgeInsets.symmetric(horizontal: 4.0),
-            child: new IconButton(
-                icon: new Icon(
+            new Container(
+              margin: new EdgeInsets.symmetric(horizontal: 4.0),
+              child: new IconButton(
+                  icon: new Icon(
                     Icons.send,
-                  color: Colors.blue,
-                ),
-                onPressed: () => _handleSubmitted(_textController.text)
+//                    color: Colors.deepPurple,
+                  ),
+                  onPressed: () => _handleSubmitted(_textController.text)),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -59,6 +66,7 @@ class ChatScreenState extends State<ChatScreen> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Friendlychat"),
+//        backgroundColor: Colors.deepPurple,
       ),
       body: _buildTextComposer(),
     );
